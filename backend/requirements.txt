@@ -1,0 +1,35 @@
+# ─── Web Framework ────────────────────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9       # file uploads
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# ─── Vector Database ──────────────────────────────────────────────────────────
+qdrant-client==1.9.1
+
+# ─── Embeddings (local) ───────────────────────────────────────────────────────
+sentence-transformers==3.0.1
+fastembed==0.3.1              # SPLADE sparse embeddings
+
+# ─── Reranker ─────────────────────────────────────────────────────────────────
+FlagEmbedding==1.2.11
+
+# ─── LLM / VLM ───────────────────────────────────────────────────────────────
+google-generativeai==0.7.2
+Pillow==10.3.0                # image handling for VLM
+
+# ─── PDF Parsing ──────────────────────────────────────────────────────────────
+PyMuPDF>=1.24.4              # primary local parser (fitz)
+llama-parse==0.4.9            # optional cloud parser
+
+# ─── ETL / Scraping ───────────────────────────────────────────────────────────
+requests==2.32.2
+beautifulsoup4==4.12.3
+lxml==5.2.2
+
+# ─── Scheduler ───────────────────────────────────────────────────────────────
+APScheduler==3.10.4
+
+# ─── Utilities ───────────────────────────────────────────────────────────────
+python-dotenv==1.0.1

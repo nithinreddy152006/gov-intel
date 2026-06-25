@@ -1,0 +1,29 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System deps for PyMuPDF and sentence-transformers
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    libmupdf-dev \
+    libfreetype6-dev \
+    libharfbuzz-dev \
+    libopenjp2-7-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python deps first (cached layer)
+COPY backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy full project (backend + data dirs)
+COPY backend/ /app/backend/
+COPY .env.example /app/.env.example
+
+# Create data directories
+RUN mkdir -p /app/data/policies /app/data/scraped /app/data/uploads
+
+EXPOSE 8000
+
+CMD ["uvicorn", "backend.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
